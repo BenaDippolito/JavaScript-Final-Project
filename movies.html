@@ -8,12 +8,13 @@
     <title>B's Movie Rating</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://kit.fontawesome.com/9e9e6f56de.js" crossorigin="anonymous"></script>
-    <script src="index.js"></script>
+    <script src="./index.js" defer></script>
+    <script src="./movies.js" defer></script>
 
 </head>
 
-<body id="movies">
-    <section>
+<body>
+    <section id="movies">
         <nav>
             <div class="nav__container">
                 <img class="logo" src="./assets/movie icon.png" alt="Logo">
@@ -22,7 +23,7 @@
                     <li><a href="#" class="nav__link">Contact</a></li>
                     <li><a href="movies.html" class="nav__link nav__link--primary">Movies</a></li>
                 </ul>
-                <div class="overlay"></div>
+
                 <button class="btn__menu" onclick="openMenu()">
                     <i class="fas fa-bars"></i>
                 </button>
@@ -43,42 +44,44 @@
                     </ul>
                 </div>
             </div>
+            <div class="overlay"></div>
         </nav>
+        <div class="header__container">
+            <div class="header__description">
+                <h2>Find your dream Movie</h2>
+            </div>
+            <div class="input__wrapper">
+                <input type="text" class="search__input" placeholder="Search for a movie or show"
+                    onchange="searchChange(event)">
+                <button class="btn" type="button" onclick="searchSubmit()">
+                    <i class="fa fa-search"></i> Search
+                </button>
+            </div>
+        </div>
     </section>
 
     <main id="movies__main">
         <section>
-            <div class="header__container">
-                <div class="header__description">
-                    <h2>Find your dream <span class="orange">Movie</span></h2>
-                </div>
-                <div>
-                    <div class="input-wrapper">
-                        <input type="text" id="search__input" class="search__input" placeholder="Search for a movie or show"
-                            oninput="searchMovie(event)">
-                        <button class="btn" <a href="movies.html" onclick="goToMovies(event)">Search</a>
-                        </button>
-                    </div>
-                </div>
-            </div>
             <div class="container">
                 <div class="row">
-                    <h2 class="section__title movie__header--title">Please select a Movie or Show</h2>
                     <div class="movies__controls">
-                        <label for="movies__sort" class="visually-hidden">Sort Movies</label>
-                        <select id="movies__sort" class="movies__sort" onchange="filterMovies(event)">
-                            <option value="">Default</option>
-                            <option value="LOW_TO_HIGH">Price: Low to High</option>
-                            <option value="HIGH_TO_LOW">Price: High to Low</option>
-                            <option value="RATING">Top Rated</option>
-                        </select>
+                        <h2 class="search-info">Search Results</h2>
+                        <div>
+                            <label for="movieSort" class="visually-hidden">Sort by year</label>
+                            <select id="movieSort" name="movieSort" onchange="sortChange(event)">
+                                <option disabled selected value="">Sort by year</option>
+                                <option value="oldest">Oldest to Newest</option>
+                                <option value="newest">Newest to Oldest</option>
+                            </select>
+                        </div>
+
                     </div>
                 </div>
+                <!-- Results container -->
+                <div class="movies"></div>
             </div>
         </section>
     </main>
-
-
 </body>
 
 </html>

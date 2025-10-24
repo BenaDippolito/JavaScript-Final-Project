@@ -73,7 +73,7 @@ button:active {
 
 .btn {
   background-color: #c2ab29;
-  color: white;
+  color: black;
   padding: 12px 24px;
   font-size: 20px;
   border-radius: 4px;
@@ -87,15 +87,13 @@ button:active {
 img {
   width: 100%;
   height: auto;
-}
-.orange {
-  color: #c2ab29;
+  position: relative;
 }
 
 .nav__container {
   width: 100%;
   max-width: 1200px;
-  padding: 0 24px;
+  padding: 0 36px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -103,11 +101,19 @@ img {
   position: relative;
 }
 
+/* Generic container for page sections */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
 .nav__link {
   margin-left: 16px;
   text-decoration: none;
   font-size: 20px;
-  color: white;
+  color: black;
   font-weight: bold;
   padding: 8px;
 }
@@ -117,7 +123,7 @@ img {
 }
 
 .nav__link--primary {
-  border: 2px solid #c2ab29;
+  border: 2px solid;
   border-radius: 4px;
 }
 
@@ -187,26 +193,6 @@ img {
   padding: 8px;
   color: white;
 }
-
-.overlay {
-  background-image: url(./assets/Movie\ theatre.jpg);
-  background-repeat: no-repeat;
-  background-position: 50%;
-  background-size: cover;
-  background-attachment: scroll;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  opacity: 0.8;
-  pointer-events: none;
-}
-.overlay::after {
-  box-sizing: inherit;
-}
-
 .nav__container .logo,
 .nav__container .nav__links,
 .nav__container .btn-contact,
@@ -236,6 +222,7 @@ img {
   width: 100%;
   position: relative;
   display: flex;
+  align-items: center;
   justify-content: center;
   margin-top: 24px;
 }
@@ -251,6 +238,32 @@ img {
 }
 
 /* Movies page */
+#movies {
+  position: relative;
+  z-index: 1;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.overlay {
+  background-image: url(./assets/Movie\ theatre.jpg);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: cover;
+  background-attachment: scroll;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.4;
+  pointer-events: none;
+  height: 100%;
+}
+.overlay::after {
+  box-sizing: inherit;
+}
 
 #movies__body {
   background-color: rgba(115, 66, 214, 0.1);
@@ -288,6 +301,15 @@ select {
   max-width: 200px;
 }
 
+.movies__controls {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+}
+
 .movies__loading {
   display: flex;
   align-items: center;
@@ -295,6 +317,54 @@ select {
   padding-top: 60px;
   font-size: 60px;
   color: #7342d6;
+}
+
+/* Movies grid layout - default 3 across */
+.movies {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 16px;
+  margin-bottom: 40px;
+}
+
+.movie {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.movie img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  aspect-ratio: 2 / 3;
+}
+
+.movie h2,
+.movie h4,
+.movie button {
+  padding: 0 12px;
+}
+
+.movie h2 {
+  font-size: 18px;
+  margin-top: 12px;
+}
+
+.movie h4 {
+  font-size: 14px;
+  color: #606266;
+  margin-top: 4px;
+  margin-bottom: 12px;
+}
+
+.movie button {
+  margin: 12px;
+  align-self: flex-start;
 }
 
 .fa-spinner {
@@ -308,6 +378,12 @@ select {
 
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 1200px) {
+  .nav__container {
+    width: 100%;
   }
 }
 
@@ -330,15 +406,25 @@ select {
   }
 
   .movie {
-    width: 50%;
+    /* Ensure grid cards take full column width on small screens */
+    width: 100%;
   }
 
   .btn__menu {
     display: block;
   }
 
+  .input-wrapper {
+    align-content: center;
+  }
+
   .nav__links {
     display: none;
+  }
+
+  /* 2 columns on tablets */
+  .movies {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -371,5 +457,10 @@ select {
 
   .logo {
     width: 20%;
+  }
+
+  /* 1 column on small phones */
+  .movies {
+    grid-template-columns: 1fr;
   }
 }
